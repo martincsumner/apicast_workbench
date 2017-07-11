@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+
+
+  vars_files:
+   - vars/defaults.yml
+
+  tasks:
+
+    ##configure the startup script.
+    - name: Setup networking (interfaces)
+      lineinfile:
+        dest: "{{apicast_startscript}}/gateway.sh"
+        insertafter: '^#!/bin/sh' 
+        state: present
+        line: 'RHSSO_ENDPOINT={{RHSSO}}'

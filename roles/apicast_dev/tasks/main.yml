@@ -1,0 +1,65 @@
+
+# used for webhooks client creation - presently not being used.
+#- name: Create apicast directories [main.d]
+#  file: path=/opt/apicast/{{apicast_deployment}}/apicast/{{item}} state=directory
+#  with_items:
+#      - main.d
+#      - client_registrations
+
+#- name: copy over the env conf.
+#  copy:
+#    src: env.conf
+#    owner: root
+#    group: root
+#    dest: /opt/apicast/{{apicast_deployment}}/apicast/main.d/env.conf
+#    mode: 0776
+
+
+#- name: copy over the rh-sso.conf
+#  copy:
+#    src: rh-sso.conf
+#    owner: root
+#    group: root
+#    dest: /opt/apicast/{{apicast_deployment}}/apicast/sites.d/rh-sso.conf
+#    mode: 0776
+
+#- name: copy over the client_registrations
+#  copy:
+#    src: webhook_handler.lua
+#    owner: root
+#    group: root
+#    dest: /opt/apicast/{{apicast_deployment}}/apicast/client_registrations/webhook_handler.lua
+#    mode: 0776
+
+
+
+##add the other tasks into here....
+
+- name: installing more lua dependcies.[ expat-devel ]
+  yum: name='expat-devel' state=present
+
+- name: installing more lua dependcies.[gcc]
+  yum: name='gcc' state=present
+
+- name: installing more lua dependcies.[lua-devel ]
+  yum: name='lua-devel' state=present
+
+- name: install development tools
+  yum: name='@^Development Tools' state=present
+
+## boil these down....
+- name: install lua expat
+  shell: luarocks install luaexpat --tree=/usr/local/openresty/luajit
+
+- name: install luaxpath
+  shell: luarocks install luaxpath --tree=/usr/local/openresty/luajit
+
+
+- name: create symbolic links to make sure OpenResty will find the installed libraries...
+  shell: ln -s /usr/local/openresty/luajit/lib64/lua/5.1/* /usr/local/openresty/luajit/lib/lua/5.1/
+
+
+- name: compile the apicast
+  shell: luarocks make apicast/*.rockspec --tree /usr/local/openresty/luajit
+  args:
+   chdir:  "{{apicast_directory}}/{{apicast_deployment}}"

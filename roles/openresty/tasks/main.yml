@@ -1,0 +1,26 @@
+- name: copy over the resty repo.
+  copy: 
+    src: "OpenResty.repo"
+    dest: "/etc/yum.repos.d/OpenResty.repo"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: install openresty.
+  yum: name='openresty' state=present  
+
+
+- name: Symlinking so luarocks can find the headers...
+  shell: ln -s /usr/local/openresty/luajit/include/luajit-2.1/* /usr/include/
+ 
+
+
+#remove....
+#- name: Symlinking so luarocks can find the headers...
+#  file:
+#    src: /usr/local/openresty/luajit/include/luajit-2.1/
+#    dest: /usr/include/
+#    force: yes 
+# #   owner: root
+#    group: root
+#    state: link

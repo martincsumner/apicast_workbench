@@ -1,0 +1,10 @@
+
+- name: download ngrok sources
+  get_url: url={{ngrok_url}}}/{{ngrok_binary}} dest=/tmp/{{ngrok_binary}}
+
+
+- name: unzipping archive
+  unarchive:
+    src: /tmp/{{ngrok_binary}}
+    dest: /vagrant/target
+    copy: no

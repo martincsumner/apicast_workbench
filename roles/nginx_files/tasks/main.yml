@@ -1,0 +1,5 @@
+
+- name: copy over the nginx proxy files...
+  unarchive:
+    src: proxy_configs.zip
+    dest: /usr/local/openresty/nginx/conf/

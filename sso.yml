@@ -1,0 +1,25 @@
+---
+#- hosts: gateway
+- hosts: all
+  become: yes
+  pre_tasks:
+
+   - name: install unzip  
+     yum: name='unzip' state=latest    
+
+   - name: install tar  
+     yum: name='tar' state=latest  
+
+    # yum: name='@^Development Tools' state=latest  
+#   nice to have but slow....
+#  - name: performing base yum update.
+#    yum: name='*' state=latest  
+
+
+ # tasks:
+  roles:
+   - java
+
+  # - ngrok 
+  # - redis
+

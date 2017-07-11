@@ -1,0 +1,59 @@
+---
+#- hosts: gateway
+- hosts: all
+  become: yes
+  pre_tasks:
+
+  # - name: removing files...
+  #   file: path='/etc/yum.conf' state=absent
+
+  # - name: removing files...
+  #   file: path='/etc/yum.repos.d/Centos-Base.repo' state=absent
+
+  # - name: configure proxy [Centos-Base.repo]
+  #   copy:
+  #    src: ./roles/proxy/files/Centos-Base.repo
+  #    dest: /etc/yum.repos.d/Centos-Base.repo
+  #    owner: root
+  #    group: root
+  #    mode: 0644
+
+  # - name: configure proxy [Centos-Base.repo]
+  #   copy:
+  #    src: ./roles/proxy/files/yum.conf
+  #    dest: /etc/yum.conf
+  #    owner: root
+  #    group: root
+  #    mode: 0644
+
+  # - name: remove fastest mirror
+  #   file: path='/etc/yum/pluginconf.d/fastestmirror.conf' state=absent
+
+
+   - name: install unzip
+     yum: name='unzip' state=latest
+
+   - name: install gcc
+     yum: name='gcc' state=present
+
+   - name: install tar
+     yum: name='tar' state=latest
+
+   - name: install EPEL.
+     yum: name='epel-release' state=present
+
+    # yum: name='@^Development Tools' state=latest
+#   nice to have but slow....
+#  - name: performing base yum update.
+#    yum: name='*' state=latest
+
+  vars_files:
+   - ../../vars/defaults.yml
+
+ # tasks:
+  roles:
+   - openresty
+   - restyother
+   - apicast_dev
+  # - java
+  # - apicast_dev

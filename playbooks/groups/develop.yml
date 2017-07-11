@@ -1,0 +1,11 @@
+---
+#- hosts: gateway
+- hosts: all
+  become: yes
+
+  vars_files:
+   - ../../vars/defaults.yml
+
+
+  roles:
+    - apicast_dev

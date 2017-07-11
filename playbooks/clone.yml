@@ -1,0 +1,19 @@
+- hosts: vmnuc
+  serial: 1
+  remote_user: root
+
+  tasks:
+
+  - name: copy in the clone xml...
+    copy:
+      src: "./files/gateway.xml"
+      dest: "/var/lib/libvirt/images/gateway.xml"
+      mode: "777"
+
+  - name: cloning vm...
+    shell: virt-clone --connect qemu:///system --original-xml /var/lib/libvirt/images/gateway.xml --name gateway --file /var/lib/libvirt/images/gateway.qcow2
+
+  - name: Starting the new clone
+    virt: 
+      name: "gateway" 
+      state: running     

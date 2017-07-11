@@ -1,0 +1,17 @@
+- name: install openresty commandline.
+  yum: name='openresty-resty' state=present   
+
+
+#- name: install the EPEL repo.
+#  shell: sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
+
+- name: Install EPEL repo.
+  yum: name=epel-release state=latest
+
+
+- name: install luarocks
+  yum: name='luarocks' state=latest   
+
+
+  # install git locally...
+
