@@ -4,32 +4,6 @@
   become: yes
   pre_tasks:
 
-  # - name: removing files...
-  #   file: path='/etc/yum.conf' state=absent
-
-  # - name: removing files...
-  #   file: path='/etc/yum.repos.d/Centos-Base.repo' state=absent
-
-  # - name: configure proxy [Centos-Base.repo]
-  #   copy:
-  #    src: ./roles/proxy/files/Centos-Base.repo
-  #    dest: /etc/yum.repos.d/Centos-Base.repo
-  #    owner: root
-  #    group: root
-  #    mode: 0644
-
-  # - name: configure proxy [Centos-Base.repo]
-  #   copy:
-  #    src: ./roles/proxy/files/yum.conf
-  #    dest: /etc/yum.conf
-  #    owner: root
-  #    group: root
-  #    mode: 0644
-
-  # - name: remove fastest mirror
-  #   file: path='/etc/yum/pluginconf.d/fastestmirror.conf' state=absent
-
-
    - name: install unzip
      yum: name='unzip' state=latest
 
