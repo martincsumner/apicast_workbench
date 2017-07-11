@@ -11,7 +11,7 @@ apicast_directory: /vagrant/
 
 #apicast_git_url: https://github.com/3scale/apicast/archive
 #apicast_binary: v3.0.0.tar.gz
-#apicast_deployment: apicast-3.0.0
+apicast_deployment: apicast-3.0.0
 
 #ngrok_url: https://bin.equinox.io/c/4VmDzA7iaHb
 #ngrok_binary: ngrok-stable-linux-amd64.zip

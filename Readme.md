@@ -41,6 +41,14 @@ GATEWAY_TOKEN: "ec255f933asl3302lsf075b8e1c767ea9206ac885ef744f657bc3c279a"
 
 
 
+- vars you might have to customise.
+if you are NOT using version 3.0.0 of apicast then you will need to edit the vars/defaults.yml
+
+and particularly the line:
+apicast_deployment: apicast-3.0.0
+
+
+
 The redhat SSO param may not be necessary depending on whether or not you wish to have Oauth2 working.
 
 
@@ -58,7 +66,8 @@ Playtime.
 Now open up a couple of terminals - I suggest four.
 if you get a permissions issue then chmod 777 * - never to be used for anything that looks like production!
 
-1. from here you will run the vagrant up / halt / destroy / provision /  rsync-auto
+1. from here you will run the vagrant up / halt / destroy / provision /  rsync-auto, so you will always be on the host with this term.
+
 2. (make sure you are at the root of $APICAST_WORKBENCH_HOME) then type 'vagrant ssh' you are now on the box.
   Type cd /vagrant and you should now be in the root of the synced APICAST_WORKBENCH_HOME.
   from here cd ./bin then type ./apicast.sh start
@@ -66,17 +75,20 @@ if you get a permissions issue then chmod 777 * - never to be used for anything 
 
   ./apicast.sh stop - kills the nginx proxy.
 
+  you are on the vm on this term.
 
 3. (make sure you are at the root of $APICAST_WORKBENCH_HOME) then type 'vagrant ssh' you are now on the box.
   Type cd /vagrant and you should now be in the root of the synced APICAST_WORKBENCH_HOME.
   then cd /vagrant/apicast-3.0.0/apicast/logs
   tail -f error.log
 
+you are on the vm on this term.
 
 4. (make sure you are at the root of $APICAST_WORKBENCH_HOME) then type 'vagrant ssh' you are now on the box.
   Type cd /vagrant and you should now be in the root of the synced APICAST_WORKBENCH_HOME.
   then cd /vagrant I would use this one for misc. poking about!
 
+you are on the vm on this term.
 
 The apicast proxy should be reachable from the host using curl or a browser on the IP of http://192.168.33.10:8080/your_stuff
 
